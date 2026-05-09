@@ -44,6 +44,7 @@
       --soft: rgba(255, 255, 255, .1);
       --edge: clamp(24px, 6.8vw, 150px);
       --gap: clamp(44px, 7vw, 130px);
+      --section-y: clamp(110px, 14vw, 230px);
       --two-col: minmax(380px, .82fr) minmax(520px, 1fr);
       --copy-size: clamp(17px, 1vw, 21px);
       --copy-line: 1.32;
@@ -256,7 +257,7 @@
     }
 
     .section {
-      padding: clamp(110px, 14vw, 230px) var(--edge);
+      padding: var(--section-y) var(--edge);
     }
 
     .section-label {
@@ -345,31 +346,42 @@
       border-bottom: 1px solid currentColor;
     }
 
-    .bento-section {
+    .bento-transition {
       position: relative;
-      padding: clamp(170px, 17vw, 340px) var(--edge) clamp(70px, 8vw, 150px);
+      --bento-logo-gap: clamp(520px, 46svh, 760px);
+      --bento-logo-w: clamp(230px, 19vw, 380px);
+      --bento-logo-h: clamp(33px, 2.73vw, 55px);
       background: #000;
     }
 
-    .bento-sticky-logo {
-      position: sticky;
-      top: 50vh;
-      top: 50svh;
-      z-index: 20;
-      height: 0;
-      pointer-events: none;
-      overflow: visible;
+    .bento-section {
+      position: relative;
+      padding: 0 var(--edge);
+      background: #000;
     }
 
-    .bento-sticky-logo img {
+    .bento-logo-space {
+      height: var(--bento-logo-gap);
+    }
+
+    .bento-motion-logo {
       position: absolute;
       left: 50%;
-      top: 0;
+      z-index: 20;
+      width: var(--bento-logo-w);
+      height: var(--bento-logo-h);
+      transform: translateX(-50%);
+      pointer-events: none;
+    }
+
+    .bento-motion-logo.is-fixed {
+      position: fixed;
+    }
+
+    .bento-motion-logo img {
       display: block;
-      width: clamp(250px, 22vw, 430px);
-      max-width: 38vw;
+      width: 100%;
       height: auto;
-      transform: translate(-50%, -50%);
     }
 
     .bento-grid {
@@ -467,45 +479,13 @@
       color: rgba(255, 255, 255, .82);
     }
 
-    .manifesto {
-      display: grid;
-      grid-template-columns: var(--two-col);
-      gap: var(--gap);
-      align-items: start;
-      min-height: 86vh;
-      border-top: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
-    }
-
-    .manifesto-title {
-      margin: 0;
-      font-family: var(--rader);
-      font-size: clamp(58px, 7vw, 132px);
-      font-weight: 700;
-      line-height: .82;
-    }
-
-    .manifesto-copy {
-      margin: 0;
-      font-size: var(--copy-size);
-      line-height: var(--copy-line);
-    }
-
-    .manifesto-cn {
-      margin: 32px 0 0;
-      max-width: 760px;
-      color: var(--muted);
-      font-family: var(--zh);
-      font-size: var(--copy-cn-size);
-      line-height: var(--copy-cn-line);
-    }
-
     .about {
       display: grid;
       grid-template-columns: var(--two-col);
       gap: var(--gap);
       align-items: start;
       min-height: 100vh;
+      padding-top: 0;
     }
 
     .about-title {
@@ -754,8 +734,7 @@
     @media (max-width: 1100px) {
       .about,
       .output,
-      .contact,
-      .manifesto {
+      .contact {
         grid-template-columns: 1fr;
       }
 
@@ -799,6 +778,7 @@
     @media (max-width: 760px) {
       :root {
         --edge: 22px;
+        --section-y: 86px;
       }
 
       .nav {
@@ -851,8 +831,7 @@
       }
 
       .about-title,
-      .output-title,
-      .manifesto-title {
+      .output-title {
         font-size: clamp(48px, 14vw, 76px);
       }
 
@@ -864,10 +843,6 @@
         min-height: 76vh;
         padding-top: 72px;
         padding-bottom: 54px;
-      }
-
-      .manifesto {
-        min-height: auto;
       }
 
       .media-band img {
@@ -983,73 +958,66 @@
       </article>
     </section>
 
-    <section class="bento-section" aria-label="Fields">
-      <div class="bento-sticky-logo" aria-hidden="true">
+    <section class="bento-transition" id="fields" aria-label="Fields">
+      <div class="bento-logo-space bento-logo-space-top" aria-hidden="true"></div>
+      <div class="bento-motion-logo" aria-hidden="true">
         <img src="assets/frens-only-logo.svg" alt="">
       </div>
 
-      <div class="bento-grid">
-        <article class="bento-card">
-          <video class="bento-media" autoplay muted loop playsinline preload="metadata">
-            <source src="Projects/cover_meta.mp4" type="video/mp4">
-          </video>
-          <div class="bento-copy">
-            <h2 class="bento-title">Entertainment</h2>
-            <p class="bento-sub">Commercial • Music Video • Album Cover • Release</p>
-          </div>
-        </article>
+      <div class="bento-section">
+        <div class="bento-grid">
+          <article class="bento-card">
+            <video class="bento-media" autoplay muted loop playsinline preload="metadata">
+              <source src="Projects/cover_meta.mp4" type="video/mp4">
+            </video>
+            <div class="bento-copy">
+              <h2 class="bento-title">Entertainment</h2>
+              <p class="bento-sub">Commercial • Music Video • Album Cover • Release</p>
+            </div>
+          </article>
 
-        <article class="bento-card">
-          <video class="bento-media" autoplay muted loop playsinline preload="metadata">
-            <source src="Projects/cover_05.mp4" type="video/mp4">
-          </video>
-          <div class="bento-copy">
-            <h2 class="bento-title">Fashion</h2>
-            <p class="bento-sub">Sneakers • Sportswear • Accessories • Digital Fashion</p>
-          </div>
-        </article>
+          <article class="bento-card">
+            <video class="bento-media" autoplay muted loop playsinline preload="metadata">
+              <source src="Projects/cover_05.mp4" type="video/mp4">
+            </video>
+            <div class="bento-copy">
+              <h2 class="bento-title">Fashion</h2>
+              <p class="bento-sub">Sneakers • Sportswear • Accessories • Digital Fashion</p>
+            </div>
+          </article>
 
-        <article class="bento-card">
-          <video class="bento-media" autoplay muted loop playsinline preload="metadata">
-            <source src="Projects/cover_02.mp4" type="video/mp4">
-          </video>
-          <div class="bento-copy">
-            <h2 class="bento-title">Cosmetics</h2>
-            <p class="bento-sub">Product Commercial • R&amp;D • Visual Film • CGI</p>
-          </div>
-        </article>
+          <article class="bento-card">
+            <video class="bento-media" autoplay muted loop playsinline preload="metadata">
+              <source src="Projects/cover_02.mp4" type="video/mp4">
+            </video>
+            <div class="bento-copy">
+              <h2 class="bento-title">Cosmetics</h2>
+              <p class="bento-sub">Product Commercial • R&amp;D • Visual Film • CGI</p>
+            </div>
+          </article>
 
-        <article class="bento-card">
-          <video class="bento-media" autoplay muted loop playsinline preload="metadata">
-            <source src="assets/frens-home.mp4" type="video/mp4">
-          </video>
-          <div class="bento-copy">
-            <h2 class="bento-title">Media Art</h2>
-            <p class="bento-sub">Billboard • Reels • Viral • Exhibition</p>
-          </div>
-        </article>
+          <article class="bento-card">
+            <video class="bento-media" autoplay muted loop playsinline preload="metadata">
+              <source src="assets/frens-home.mp4" type="video/mp4">
+            </video>
+            <div class="bento-copy">
+              <h2 class="bento-title">Media Art</h2>
+              <p class="bento-sub">Billboard • Reels • Viral • Exhibition</p>
+            </div>
+          </article>
 
-        <article class="bento-card">
-          <video class="bento-media" autoplay muted loop playsinline preload="metadata">
-            <source src="Projects/cover_04.mp4" type="video/mp4">
-          </video>
-          <div class="bento-copy">
-            <h2 class="bento-title">Tech</h2>
-            <p class="bento-sub">Cars • Tech Product • R&amp;D • Commercial • CGI</p>
-          </div>
-        </article>
+          <article class="bento-card">
+            <video class="bento-media" autoplay muted loop playsinline preload="metadata">
+              <source src="Projects/cover_04.mp4" type="video/mp4">
+            </video>
+            <div class="bento-copy">
+              <h2 class="bento-title">Tech</h2>
+              <p class="bento-sub">Cars • Tech Product • R&amp;D • Commercial • CGI</p>
+            </div>
+          </article>
+        </div>
       </div>
-    </section>
-
-    <section class="section manifesto" aria-label="Frens Only position">
-      <div>
-        <p class="section-label">Position / <span class="zh">立场</span></p>
-        <h2 class="manifesto-title">The image comes first.</h2>
-      </div>
-      <div>
-        <p class="manifesto-copy">We are not here to explain the machine. We are here to shape what it makes visible.</p>
-        <p class="manifesto-cn">我们不是为了说明机器而存在。我们关心的是它让什么变得可见，以及这张图像如何获得气候、节奏与记忆。</p>
-      </div>
+      <div class="bento-logo-space bento-logo-space-bottom" aria-hidden="true"></div>
     </section>
 
     <section class="section about" id="about" aria-label="About Frens Only">
@@ -1149,6 +1117,35 @@
     updateNav();
     window.addEventListener("scroll", updateNav, { passive: true });
     window.addEventListener("resize", updateNav);
+
+    const bentoTransition = document.querySelector(".bento-transition");
+    const bentoLogo = document.querySelector(".bento-motion-logo");
+    const bentoTopSpace = document.querySelector(".bento-logo-space-top");
+    const bentoBottomSpace = document.querySelector(".bento-logo-space-bottom");
+
+    const updateBentoLogo = () => {
+      if (!bentoTransition || !bentoLogo || !bentoTopSpace || !bentoBottomSpace) return;
+
+      const sectionTop = bentoTransition.offsetTop;
+      const logoHeight = bentoLogo.offsetHeight;
+      const viewportTop = (window.innerHeight - logoHeight) / 2;
+      const viewportCenterInSection = window.scrollY + viewportTop - sectionTop;
+      const startTop = bentoTopSpace.offsetTop + ((bentoTopSpace.offsetHeight - logoHeight) / 2);
+      const endTop = bentoBottomSpace.offsetTop + ((bentoBottomSpace.offsetHeight - logoHeight) / 2);
+
+      if (viewportCenterInSection > startTop && viewportCenterInSection < endTop) {
+        bentoLogo.classList.add("is-fixed");
+        bentoLogo.style.top = `${viewportTop}px`;
+        return;
+      }
+
+      bentoLogo.classList.remove("is-fixed");
+      bentoLogo.style.top = `${Math.max(startTop, Math.min(viewportCenterInSection, endTop))}px`;
+    };
+
+    updateBentoLogo();
+    window.addEventListener("scroll", updateBentoLogo, { passive: true });
+    window.addEventListener("resize", updateBentoLogo);
   </script>
 </body>
 </html>
