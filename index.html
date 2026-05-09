@@ -1,0 +1,946 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Frens Only</title>
+  <meta name="description" content="Frens Only is a Computational Culture Centre for synthetic media, AI cinema, 3D visual culture, and digital presence.">
+  <meta property="og:title" content="Frens Only">
+  <meta property="og:description" content="A Computational Culture Centre for synthetic media, AI cinema, 3D visual culture, and digital presence.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://frensonly.club">
+  <meta property="og:image" content="assets/frens-home-poster.jpg">
+  <style>
+    @font-face {
+      font-family: "PP Rader";
+      src: url("assets/fonts/PPRader-Bold.woff2") format("woff2");
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: "PP Rader";
+      src: url("assets/fonts/PPRader-Medium.woff2") format("woff2");
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: "Noto Sans SC";
+      src: url("assets/fonts/NotoSansSC-VariableFont_wght.ttf") format("truetype");
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    :root {
+      color-scheme: dark;
+      --bg: #000;
+      --fg: #fff;
+      --muted: rgba(255, 255, 255, .64);
+      --line: rgba(255, 255, 255, .52);
+      --soft: rgba(255, 255, 255, .1);
+      --edge: clamp(24px, 6.8vw, 150px);
+      --gap: clamp(44px, 7vw, 130px);
+      --two-col: minmax(380px, .82fr) minmax(520px, 1fr);
+      --copy-size: clamp(17px, 1vw, 21px);
+      --copy-line: 1.32;
+      --copy-cn-size: clamp(16px, .95vw, 20px);
+      --copy-cn-line: 1.42;
+      --detail-size: clamp(15px, .9vw, 18px);
+      --detail-line: 1.3;
+      --serif: Georgia, "Times New Roman", serif;
+      --rader: "PP Rader", Arial, Helvetica, sans-serif;
+      --sans: "PP Rader", Arial, Helvetica, sans-serif;
+      --zh: "Noto Sans SC", Arial, Helvetica, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--bg);
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: var(--sans);
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 1.35;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img,
+    video {
+      display: block;
+      max-width: 100%;
+    }
+
+    .nav {
+      position: fixed;
+      top: 44px;
+      left: var(--edge);
+      right: var(--edge);
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      isolation: isolate;
+      pointer-events: none;
+    }
+
+    .nav::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: -1;
+      height: 126px;
+      background: #000;
+      opacity: 0;
+      transition: opacity .18s ease;
+      pointer-events: none;
+    }
+
+    body.frens-nav-solid .nav::before {
+      opacity: 1;
+    }
+
+    .nav-links,
+    .nav-social {
+      display: flex;
+      align-items: center;
+      gap: clamp(20px, 1.8vw, 34px);
+      pointer-events: auto;
+    }
+
+    .nav a {
+      font-family: var(--rader);
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1;
+      color: var(--fg);
+    }
+
+    .nav a:hover {
+      opacity: .62;
+    }
+
+    .ig-link {
+      width: 18px;
+      height: 18px;
+    }
+
+    .ig-link svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .hero {
+      position: relative;
+      height: 100vh;
+      height: 100svh;
+      max-height: 2000px;
+      overflow: hidden;
+      background: #000;
+    }
+
+    .hero-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      max-width: none;
+      object-fit: cover;
+      object-position: center center;
+      opacity: .36;
+      filter: grayscale(1) contrast(1.08) brightness(.72);
+      transform: none;
+    }
+
+    .hero-shade {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, .5);
+    }
+
+    .hero-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      z-index: 2;
+      width: max-content;
+      max-width: calc(100vw - 64px);
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+
+    .welcome {
+      position: absolute;
+      bottom: calc(100% + 34px);
+      left: 0;
+      width: 100%;
+      margin: 0;
+      font-family: var(--rader);
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 1;
+    }
+
+    .hero-title {
+      margin: 0;
+      font-family: var(--rader);
+      font-size: clamp(88px, 10.8vw, 170px);
+      font-weight: 700;
+      letter-spacing: 0;
+      line-height: .72;
+      white-space: nowrap;
+    }
+
+    .hero-logo-wrap {
+      display: block;
+      width: clamp(760px, 46.4vw, 920px);
+      max-width: calc(100vw - 64px);
+    }
+
+    .hero-logo {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .hero-bottom {
+      position: absolute;
+      top: calc(100% + 31px);
+      left: 0;
+      right: 0;
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 100%;
+      margin: 0;
+      text-align: left;
+    }
+
+    .hero-small {
+      margin: 0;
+      font-family: var(--rader);
+      font-size: clamp(18px, 1.22vw, 24px);
+      font-weight: 700;
+      line-height: .9;
+      transform: translateX(1px);
+    }
+
+    .hero-cn {
+      margin: 0;
+      font-family: var(--zh);
+      font-size: clamp(21px, 1.55vw, 30px);
+      font-weight: 400;
+      line-height: 1.08;
+      text-align: right;
+      white-space: nowrap;
+      transform: translateX(18px);
+    }
+
+    .section {
+      padding: clamp(110px, 14vw, 230px) var(--edge);
+    }
+
+    .section-label {
+      margin: 0 0 28px;
+      font-family: var(--rader);
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    .section-label .zh {
+      font-family: var(--zh);
+      font-weight: 400;
+    }
+
+    .projects {
+      padding: 0;
+    }
+
+    .featured-project {
+      position: relative;
+      min-height: min(100vh, 1180px);
+      overflow: hidden;
+      display: grid;
+      place-items: center;
+      padding: clamp(64px, 7vw, 132px) var(--edge);
+      border-top: 1px solid rgba(255, 255, 255, .08);
+      background: #000;
+    }
+
+    .featured-media {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      max-width: none;
+      object-fit: cover;
+      opacity: 1;
+      filter: grayscale(.08) contrast(1.02) brightness(.94);
+    }
+
+    .featured-project::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, .18);
+    }
+
+    .featured-copy {
+      position: relative;
+      z-index: 1;
+      width: min(820px, calc(100vw - 48px));
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      text-align: center;
+    }
+
+    .featured-subtitle,
+    .featured-link {
+      margin: 0;
+      font-family: var(--sans);
+      font-size: var(--detail-size);
+      font-weight: 500;
+      line-height: var(--detail-line);
+    }
+
+    .featured-title {
+      margin: 0;
+      font-family: var(--serif);
+      font-size: clamp(56px, 7.3vw, 132px);
+      font-weight: 400;
+      line-height: .9;
+      letter-spacing: 0;
+    }
+
+    .featured-subtitle {
+      margin-top: clamp(4px, .45vw, 9px);
+    }
+
+    .featured-link {
+      margin-top: clamp(24px, 2.4vw, 42px);
+      border-bottom: 1px solid currentColor;
+    }
+
+    .manifesto {
+      display: grid;
+      grid-template-columns: var(--two-col);
+      gap: var(--gap);
+      align-items: start;
+      min-height: 86vh;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .manifesto-title {
+      margin: 0;
+      font-family: var(--rader);
+      font-size: clamp(58px, 7vw, 132px);
+      font-weight: 700;
+      line-height: .82;
+    }
+
+    .manifesto-copy {
+      margin: 0;
+      font-size: var(--copy-size);
+      line-height: var(--copy-line);
+    }
+
+    .manifesto-cn {
+      margin: 32px 0 0;
+      max-width: 760px;
+      color: var(--muted);
+      font-family: var(--zh);
+      font-size: var(--copy-cn-size);
+      line-height: var(--copy-cn-line);
+    }
+
+    .about {
+      display: grid;
+      grid-template-columns: var(--two-col);
+      gap: var(--gap);
+      align-items: start;
+      min-height: 100vh;
+    }
+
+    .about-title {
+      margin: 0 0 34px;
+      max-width: 760px;
+      font-family: var(--serif);
+      font-size: clamp(58px, 7.2vw, 132px);
+      font-weight: 700;
+      line-height: .91;
+      letter-spacing: 0;
+    }
+
+    .about-copy {
+      max-width: 620px;
+      color: var(--fg);
+      font-size: var(--copy-size);
+      line-height: var(--copy-line);
+    }
+
+    .about-copy p {
+      margin: 0;
+    }
+
+    .about-copy p + p {
+      margin-top: 18px;
+    }
+
+    .zh-copy {
+      font-family: var(--zh);
+      font-size: var(--copy-cn-size);
+      line-height: var(--copy-cn-line);
+      color: var(--muted);
+    }
+
+    .principles {
+      border-top: 1px solid var(--line);
+    }
+
+    .principle {
+      display: grid;
+      grid-template-columns: minmax(170px, .72fr) minmax(240px, 1fr);
+      gap: clamp(28px, 3.6vw, 64px);
+      padding: 34px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .principle h3 {
+      margin: 0;
+      font-family: var(--rader);
+      font-size: clamp(20px, 1.8vw, 31px);
+      font-weight: 700;
+      line-height: .98;
+    }
+
+    .principle h3 .zh {
+      display: block;
+      margin-top: 8px;
+      font-family: var(--zh);
+      font-size: .96em;
+      font-weight: 400;
+      line-height: 1.05;
+    }
+
+    .principle p {
+      margin: 0;
+      font-size: var(--detail-size);
+      line-height: var(--detail-line);
+    }
+
+    .principle p + p {
+      margin-top: 12px;
+    }
+
+    .media-band {
+      padding: 0 var(--edge);
+    }
+
+    .media-band img {
+      width: 100%;
+      height: clamp(420px, 58vw, 980px);
+      object-fit: cover;
+      border-radius: 28px;
+    }
+
+    .output {
+      display: grid;
+      grid-template-columns: var(--two-col);
+      gap: var(--gap);
+      align-items: start;
+    }
+
+    .output-title {
+      margin: 0;
+      font-family: var(--serif);
+      font-size: clamp(58px, 7.3vw, 132px);
+      font-weight: 700;
+      line-height: .9;
+    }
+
+    .output-lead {
+      margin: 0 0 42px;
+      max-width: 860px;
+      font-size: var(--copy-size);
+      line-height: var(--copy-line);
+    }
+
+    .output-cn {
+      margin: 0 0 56px;
+      max-width: 760px;
+      font-family: var(--zh);
+      font-size: var(--copy-cn-size);
+      line-height: var(--copy-cn-line);
+      color: var(--muted);
+    }
+
+    .output-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 34px 30px;
+    }
+
+    .output-item {
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+    }
+
+    .output-item h3 {
+      margin: 0 0 9px;
+      font-family: var(--rader);
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .output-item p {
+      margin: 0;
+      color: var(--muted);
+      font-size: var(--detail-size);
+      line-height: var(--detail-line);
+    }
+
+    .frames {
+      padding-top: 0;
+    }
+
+    .frames-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 36px;
+      margin-bottom: 34px;
+    }
+
+    .frames-title {
+      margin: 0;
+      font-family: var(--rader);
+      font-size: clamp(42px, 5vw, 96px);
+      font-weight: 700;
+      line-height: .9;
+    }
+
+    .frames-note {
+      margin: 0;
+      max-width: 420px;
+      color: var(--muted);
+      font-family: var(--zh);
+      font-size: 18px;
+      line-height: 1.25;
+      text-align: right;
+    }
+
+    .frame-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .frame-grid img {
+      width: 100%;
+      aspect-ratio: 1 / 1.12;
+      object-fit: cover;
+      background: var(--soft);
+    }
+
+    .contact {
+      min-height: 82vh;
+      display: grid;
+      grid-template-columns: var(--two-col);
+      gap: var(--gap);
+      align-items: start;
+      border-top: 1px solid var(--line);
+    }
+
+    .contact-title {
+      margin: 0;
+      font-family: var(--rader);
+      font-size: clamp(70px, 11vw, 190px);
+      font-weight: 700;
+      line-height: .78;
+    }
+
+    .contact-copy {
+      margin: 0 0 42px;
+      max-width: 650px;
+      font-size: var(--copy-size);
+      line-height: var(--copy-line);
+    }
+
+    .contact-cn {
+      margin: 0 0 46px;
+      max-width: 650px;
+      color: var(--muted);
+      font-family: var(--zh);
+      font-size: var(--copy-cn-size);
+      line-height: var(--copy-cn-line);
+    }
+
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px 26px;
+      font-family: var(--rader);
+      font-size: 18px;
+      font-weight: 500;
+    }
+
+    .contact-links a {
+      border-bottom: 1px solid currentColor;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 34px var(--edge);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 1100px) {
+      .about,
+      .output,
+      .contact,
+      .manifesto {
+        grid-template-columns: 1fr;
+      }
+
+      .featured-copy {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+
+      .featured-link {
+        justify-self: start;
+      }
+
+      .principle {
+        grid-template-columns: 1fr;
+      }
+
+      .frame-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 760px) {
+      :root {
+        --edge: 22px;
+      }
+
+      .nav {
+        top: 26px;
+      }
+
+      .nav-links {
+        gap: 16px;
+      }
+
+      .nav a {
+        font-size: 12px;
+      }
+
+      .welcome {
+        margin-bottom: 24px;
+        font-size: 15px;
+      }
+
+      .hero-title {
+        font-size: clamp(47px, 16.8vw, 82px);
+        line-height: .8;
+      }
+
+      .hero-logo-wrap {
+        width: min(72vw, 330px);
+        max-width: calc(100vw - 44px);
+      }
+
+      .hero-bottom {
+        gap: 22px;
+        margin-top: 24px;
+      }
+
+      .hero-small {
+        font-size: 13px;
+        transform: none;
+      }
+
+      .hero-cn {
+        font-size: 12px;
+        line-height: 1.05;
+        white-space: nowrap;
+        transform: none;
+      }
+
+      .section {
+        padding-top: 86px;
+        padding-bottom: 92px;
+      }
+
+      .about-title,
+      .output-title,
+      .manifesto-title {
+        font-size: clamp(48px, 14vw, 76px);
+      }
+
+      .output-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .featured-project {
+        min-height: 76vh;
+        padding-top: 72px;
+        padding-bottom: 54px;
+      }
+
+      .manifesto {
+        min-height: auto;
+      }
+
+      .media-band img {
+        height: 68vh;
+        border-radius: 18px;
+      }
+
+      .frames-head,
+      .footer {
+        display: block;
+      }
+
+      .frames-note {
+        margin-top: 18px;
+        text-align: left;
+      }
+
+      .frame-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-title {
+        font-size: clamp(58px, 18vw, 92px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav" aria-label="Primary">
+    <div class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#work">Work</a>
+      <a href="#about">About</a>
+      <a href="#output">Output</a>
+      <a href="https://marpple.shop/en/frensonly" target="_blank" rel="noreferrer">Shop</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="nav-social">
+      <a class="ig-link" href="https://www.instagram.com/frensonly_club/" target="_blank" rel="noreferrer" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="4.25" y="4.25" width="15.5" height="15.5" rx="4.6" fill="none" stroke="currentColor" stroke-width="1.8"></rect>
+          <circle cx="12" cy="12" r="3.55" fill="none" stroke="currentColor" stroke-width="1.8"></circle>
+          <circle cx="16.55" cy="7.45" r="1.05" fill="currentColor"></circle>
+        </svg>
+      </a>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero" id="home" aria-label="Frens Only home">
+      <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="assets/frens-home-poster.jpg">
+        <source src="assets/frens-home.mp4" type="video/mp4">
+      </video>
+      <div class="hero-shade"></div>
+      <div class="hero-center">
+        <p class="welcome">Welcome</p>
+        <h1 class="hero-title" aria-label="FRENS ONLY">
+          <picture class="hero-logo-wrap">
+            <source media="(max-width: 760px)" srcset="assets/frens-only-logo-mobile.svg">
+            <img class="hero-logo" src="assets/frens-only-logo.svg" alt="FRENS ONLY">
+          </picture>
+        </h1>
+        <div class="hero-bottom">
+          <p class="hero-small">We<br>make<br>images</p>
+          <p class="hero-cn">最终作品应像某种必然：<br>一张拥有自身气候、逻辑与脉搏的图像。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="projects" id="work" aria-label="Featured work">
+      <article class="featured-project">
+        <video class="featured-media" autoplay muted loop playsinline preload="metadata">
+          <source src="Projects/cover_02.mp4" type="video/mp4">
+        </video>
+        <div class="featured-copy">
+          <h2 class="featured-title">Similac</h2>
+          <p class="featured-subtitle">Abbot</p>
+          <a class="featured-link" href="#contact">See More</a>
+        </div>
+      </article>
+
+      <article class="featured-project">
+        <video class="featured-media" autoplay muted loop playsinline preload="metadata">
+          <source src="Projects/cover_03.mp4" type="video/mp4">
+        </video>
+        <div class="featured-copy">
+          <h2 class="featured-title">Asistente</h2>
+          <p class="featured-subtitle">Banco de C</p>
+          <a class="featured-link" href="#contact">See More</a>
+        </div>
+      </article>
+
+      <article class="featured-project">
+        <video class="featured-media" autoplay muted loop playsinline preload="metadata">
+          <source src="Projects/cover_04.mp4" type="video/mp4">
+        </video>
+        <div class="featured-copy">
+          <h2 class="featured-title">NAN Science</h2>
+          <p class="featured-subtitle">Nestlé</p>
+          <a class="featured-link" href="#contact">See More</a>
+        </div>
+      </article>
+
+      <article class="featured-project">
+        <video class="featured-media" autoplay muted loop playsinline preload="metadata">
+          <source src="Projects/cover_05.mp4" type="video/mp4">
+        </video>
+        <div class="featured-copy">
+          <h2 class="featured-title">Meet Peru</h2>
+          <p class="featured-subtitle">Midjourney</p>
+          <a class="featured-link" href="#contact">See More</a>
+        </div>
+      </article>
+    </section>
+
+    <section class="section manifesto" aria-label="Frens Only position">
+      <div>
+        <p class="section-label">Position / <span class="zh">立场</span></p>
+        <h2 class="manifesto-title">The image comes first.</h2>
+      </div>
+      <div>
+        <p class="manifesto-copy">We are not here to explain the machine. We are here to shape what it makes visible.</p>
+        <p class="manifesto-cn">我们不是为了说明机器而存在。我们关心的是它让什么变得可见，以及这张图像如何获得气候、节奏与记忆。</p>
+      </div>
+    </section>
+
+    <section class="section about" id="about" aria-label="About Frens Only">
+      <div>
+        <p class="section-label">About / <span class="zh">关于</span></p>
+        <h2 class="about-title">Images move through cinema, software, 3D space, and the internet.</h2>
+        <div class="about-copy">
+          <p>Frens Only is a Computational Culture Centre for synthetic media, AI cinema, and 3D visual culture. Between Taipei, Lima, Los Angeles, and online, it shapes images with atmosphere, rhythm, and presence.</p>
+          <p class="zh-copy">Frens Only 是一个计算文化中心，专注于合成媒体、AI 影像与 3D 视觉文化。在台北、利马、洛杉矶与线上空间之间，它塑造带有气氛、节奏与存在感的影像。</p>
+        </div>
+      </div>
+
+      <div class="principles" aria-label="Principles">
+        <article class="principle">
+          <h3>Creativity Over Tools <span class="zh">以意为先，技术为用</span></h3>
+          <div>
+            <p>The image begins with intention: a tension, a mood, a world trying to appear.</p>
+            <p class="zh-copy">影像始于意图：一种张力、一种气氛、一个正在显现的世界。</p>
+          </div>
+        </article>
+        <article class="principle">
+          <h3>Sharpen The Instrument <span class="zh">工欲善其事，必先利其器</span></h3>
+          <div>
+            <p>Speed and precision matter when they create more room for visual judgment.</p>
+            <p class="zh-copy">速度与精度的意义，在于为视觉判断留下更多空间。</p>
+          </div>
+        </article>
+        <article class="principle">
+          <h3>Beyond The Form <span class="zh">得意忘形</span></h3>
+          <div>
+            <p>The final piece should feel inevitable: an image with its own weather, logic, and pulse.</p>
+            <p class="zh-copy">最终作品应像某种必然：一张拥有自身气候、逻辑与脉搏的图像。</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section output" id="output" aria-label="Output">
+      <div>
+        <p class="section-label">Output / <span class="zh">产出</span></p>
+        <h2 class="output-title">Output</h2>
+      </div>
+      <div>
+        <p class="output-lead">We make images that move between cinema, software, 3D space, and the internet.</p>
+        <p class="output-cn">我们制作介于电影、软件、三维空间与互联网之间的影像。有些成为影片，有些成为世界，有些只是一张准确的图像，却能改变整个项目的气氛。</p>
+        <div class="output-grid">
+          <article class="output-item">
+            <h3>01 / Moving Image</h3>
+            <p>Short films, loops, edits, teasers, music pieces, and audiovisual fragments built with direction before technique.</p>
+          </article>
+          <article class="output-item">
+            <h3>02 / Synthetic Worlds</h3>
+            <p>Objects, environments, characters, surfaces, and atmospheres shaped through AI, 3D, CGI, and post-production.</p>
+          </article>
+          <article class="output-item">
+            <h3>03 / Visual Systems</h3>
+            <p>A coherent language of stills, motion, references, formats, and rules so a project can keep expanding without losing its center.</p>
+          </article>
+          <article class="output-item">
+            <h3>04 / Digital Presence</h3>
+            <p>Images for screens, releases, social space, performances, objects, and moments where culture is experienced online.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section contact" id="contact" aria-label="Contact">
+      <div>
+        <p class="section-label">Contact / <span class="zh">联系</span></p>
+        <h2 class="contact-title">Frens<br>Only</h2>
+      </div>
+      <div>
+        <p class="contact-copy">For films, worlds, releases, objects, and images that need their own atmosphere.</p>
+        <p class="contact-cn">为影片、世界、发布、物件，以及需要自身气候的图像而存在。</p>
+        <div class="contact-links">
+          <a href="https://www.instagram.com/frensonly_club/" target="_blank" rel="noreferrer">Instagram</a>
+          <a href="https://frensonly.club">frensonly.club</a>
+          <a href="#home">Back to top</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>©2026 Frens Only / Computational Culture Centre.</span>
+    <span>Taipei, Lima, Los Angeles, Online.</span>
+  </footer>
+  <script>
+    const hero = document.querySelector(".hero");
+    const updateNav = () => {
+      const limit = hero ? hero.offsetHeight : 0;
+      document.body.classList.toggle("frens-nav-solid", window.scrollY > limit);
+    };
+    updateNav();
+    window.addEventListener("scroll", updateNav, { passive: true });
+    window.addEventListener("resize", updateNav);
+  </script>
+</body>
+</html>
