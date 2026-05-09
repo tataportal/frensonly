@@ -411,6 +411,12 @@
       margin-top: 18px;
     }
 
+    .about-right {
+      display: grid;
+      gap: clamp(42px, 5vw, 78px);
+      align-content: start;
+    }
+
     .zh-copy {
       font-family: var(--zh);
       font-size: var(--copy-cn-size);
@@ -851,34 +857,37 @@
       <div>
         <p class="section-label">About / <span class="zh">关于</span></p>
         <h2 class="about-title">Images move through cinema, software, 3D space, and the internet.</h2>
+      </div>
+
+      <div class="about-right">
         <div class="about-copy">
           <p>Frens Only is a Computational Culture Centre for synthetic media, AI cinema, and 3D visual culture. Between Taipei, Lima, Los Angeles, and online, it shapes images with atmosphere, rhythm, and presence.</p>
           <p class="zh-copy">Frens Only 是一个计算文化中心，专注于合成媒体、AI 影像与 3D 视觉文化。在台北、利马、洛杉矶与线上空间之间，它塑造带有气氛、节奏与存在感的影像。</p>
         </div>
-      </div>
 
-      <div class="principles" aria-label="Principles">
-        <article class="principle">
-          <h3>Creativity Over Tools <span class="zh">以意为先，技术为用</span></h3>
-          <div>
-            <p>The image begins with intention: a tension, a mood, a world trying to appear.</p>
-            <p class="zh-copy">影像始于意图：一种张力、一种气氛、一个正在显现的世界。</p>
-          </div>
-        </article>
-        <article class="principle">
-          <h3>Sharpen The Instrument <span class="zh">工欲善其事，必先利其器</span></h3>
-          <div>
-            <p>Speed and precision matter when they create more room for visual judgment.</p>
-            <p class="zh-copy">速度与精度的意义，在于为视觉判断留下更多空间。</p>
-          </div>
-        </article>
-        <article class="principle">
-          <h3>Beyond The Form <span class="zh">得意忘形</span></h3>
-          <div>
-            <p>The final piece should feel inevitable: an image with its own weather, logic, and pulse.</p>
-            <p class="zh-copy">最终作品应像某种必然：一张拥有自身气候、逻辑与脉搏的图像。</p>
-          </div>
-        </article>
+        <div class="principles" aria-label="Principles">
+          <article class="principle">
+            <h3>Creativity Over Tools <span class="zh">以意为先，技术为用</span></h3>
+            <div>
+              <p>The image begins with intention: a tension, a mood, a world trying to appear.</p>
+              <p class="zh-copy">影像始于意图：一种张力、一种气氛、一个正在显现的世界。</p>
+            </div>
+          </article>
+          <article class="principle">
+            <h3>Sharpen The Instrument <span class="zh">工欲善其事，必先利其器</span></h3>
+            <div>
+              <p>Speed and precision matter when they create more room for visual judgment.</p>
+              <p class="zh-copy">速度与精度的意义，在于为视觉判断留下更多空间。</p>
+            </div>
+          </article>
+          <article class="principle">
+            <h3>Beyond The Form <span class="zh">得意忘形</span></h3>
+            <div>
+              <p>The final piece should feel inevitable: an image with its own weather, logic, and pulse.</p>
+              <p class="zh-copy">最终作品应像某种必然：一张拥有自身气候、逻辑与脉搏的图像。</p>
+            </div>
+          </article>
+        </div>
       </div>
     </section>
 
