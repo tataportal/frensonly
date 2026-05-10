@@ -346,6 +346,41 @@
       border-bottom: 1px solid currentColor;
     }
 
+    .work-statement {
+      padding: clamp(120px, 14vw, 260px) var(--edge);
+      background: #000;
+    }
+
+    .work-statement-inner {
+      width: min(1080px, 100%);
+      margin: 0 auto;
+    }
+
+    .work-statement-main {
+      margin: 0;
+      font-family: var(--rader);
+      font-size: clamp(36px, 4.8vw, 92px);
+      font-weight: 700;
+      line-height: .96;
+      letter-spacing: 0;
+    }
+
+    .work-statement-lines {
+      margin: clamp(34px, 4vw, 74px) 0 0;
+      font-family: var(--rader);
+      font-size: clamp(24px, 2.3vw, 46px);
+      font-weight: 700;
+      line-height: 1.03;
+    }
+
+    .work-statement-zh {
+      margin: clamp(38px, 4vw, 72px) 0 0;
+      font-family: var(--zh);
+      font-size: clamp(28px, 3vw, 58px);
+      font-weight: 400;
+      line-height: 1.08;
+    }
+
     .bento-transition {
       position: relative;
       --bento-logo-gap: clamp(520px, 46svh, 760px);
@@ -478,17 +513,39 @@
       grid-template-columns: var(--two-col);
       gap: var(--gap);
       align-items: start;
-      min-height: 100vh;
       padding-top: 0;
+      padding-bottom: clamp(58px, 6vw, 112px);
+    }
+
+    .about-media {
+      display: grid;
+      gap: clamp(28px, 3vw, 48px);
+      align-content: start;
+    }
+
+    .about-video-slot {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      border-radius: clamp(18px, 2vw, 44px);
+      background: #111;
+    }
+
+    .about-video-slot video {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     .about-title {
-      margin: 0 0 34px;
-      max-width: 760px;
+      margin: 0;
+      max-width: 860px;
       font-family: var(--serif);
-      font-size: clamp(58px, 7.2vw, 132px);
+      font-size: clamp(44px, 4.9vw, 96px);
       font-weight: 700;
-      line-height: .91;
+      line-height: .94;
       letter-spacing: 0;
     }
 
@@ -509,8 +566,9 @@
 
     .about-right {
       display: grid;
-      gap: clamp(42px, 5vw, 78px);
+      gap: clamp(34px, 4.2vw, 68px);
       align-content: start;
+      padding-top: calc(42px + clamp(28px, 3vw, 48px));
     }
 
     .zh-copy {
@@ -571,30 +629,27 @@
     }
 
     .output {
-      display: grid;
-      grid-template-columns: var(--two-col);
-      gap: var(--gap);
-      align-items: start;
+      display: block;
+      padding-top: clamp(58px, 6vw, 112px);
     }
 
-    .output-title {
-      margin: 0;
-      font-family: var(--serif);
-      font-size: clamp(58px, 7.3vw, 132px);
-      font-weight: 700;
-      line-height: .9;
+    .output-head {
+      width: min(1160px, 100%);
+      margin: 0 auto clamp(80px, 9vw, 160px);
+      text-align: center;
     }
 
     .output-lead {
-      margin: 0 0 42px;
-      max-width: 860px;
-      font-size: var(--copy-size);
-      line-height: var(--copy-line);
+      margin: 0;
+      font-family: var(--sans);
+      font-size: clamp(26px, 2.3vw, 48px);
+      font-weight: 700;
+      line-height: 1.04;
     }
 
     .output-cn {
-      margin: 0 0 56px;
-      max-width: 760px;
+      margin: clamp(34px, 3.8vw, 72px) auto 0;
+      max-width: 900px;
       font-family: var(--zh);
       font-size: var(--copy-cn-size);
       line-height: var(--copy-cn-line);
@@ -603,21 +658,37 @@
 
     .output-grid {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 34px 30px;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: clamp(14px, 1.2vw, 24px);
     }
 
     .output-item {
-      padding-top: 18px;
-      border-top: 1px solid var(--line);
+      min-width: 0;
+    }
+
+    .output-media {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      aspect-ratio: 1.08 / 1;
+      border-radius: clamp(18px, 1.7vw, 34px);
+      background: #111;
+    }
+
+    .output-media video {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(1.04) contrast(1.02);
     }
 
     .output-item h3 {
-      margin: 0 0 9px;
+      margin: clamp(18px, 1.6vw, 28px) 0 clamp(12px, 1vw, 18px);
       font-family: var(--rader);
-      font-size: 18px;
+      font-size: clamp(24px, 2vw, 42px);
       font-weight: 700;
-      line-height: 1;
+      line-height: .92;
     }
 
     .output-item p {
@@ -671,49 +742,22 @@
     }
 
     .contact {
-      min-height: 82vh;
-      display: grid;
-      grid-template-columns: var(--two-col);
-      gap: var(--gap);
-      align-items: start;
-      border-top: 1px solid var(--line);
+      min-height: auto;
+      padding-top: clamp(120px, 13vw, 240px);
+      padding-bottom: calc(clamp(120px, 13vw, 240px) + var(--section-y) - 34px);
+      text-align: center;
     }
 
-    .contact-title {
+    .contact-dm {
       margin: 0;
       font-family: var(--rader);
-      font-size: clamp(70px, 11vw, 190px);
-      font-weight: 700;
-      line-height: .78;
-    }
-
-    .contact-copy {
-      margin: 0 0 42px;
-      max-width: 650px;
       font-size: var(--copy-size);
+      font-weight: 500;
       line-height: var(--copy-line);
     }
 
-    .contact-cn {
-      margin: 0 0 46px;
-      max-width: 650px;
-      color: var(--muted);
-      font-family: var(--zh);
-      font-size: var(--copy-cn-size);
-      line-height: var(--copy-cn-line);
-    }
-
-    .contact-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px 26px;
-      font-family: var(--rader);
-      font-size: 18px;
-      font-weight: 500;
-    }
-
-    .contact-links a {
-      border-bottom: 1px solid currentColor;
+    .contact-dm a:hover {
+      opacity: .64;
     }
 
     .footer {
@@ -725,11 +769,19 @@
       font-size: 13px;
     }
 
+    @media (max-width: 1320px) {
+      .output-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
     @media (max-width: 1100px) {
-      .about,
-      .output,
-      .contact {
+      .about {
         grid-template-columns: 1fr;
+      }
+
+      .about-right {
+        padding-top: 0;
       }
 
       .featured-copy {
@@ -819,8 +871,15 @@
         padding-bottom: 92px;
       }
 
-      .about-title,
-      .output-title {
+      .about {
+        padding-bottom: 58px;
+      }
+
+      .output {
+        padding-top: 58px;
+      }
+
+      .about-title {
         font-size: clamp(48px, 14vw, 76px);
       }
 
@@ -853,9 +912,6 @@
         grid-template-columns: 1fr;
       }
 
-      .contact-title {
-        font-size: clamp(58px, 18vw, 92px);
-      }
     }
   </style>
 </head>
@@ -947,6 +1003,14 @@
       </article>
     </section>
 
+    <section class="work-statement" aria-label="Frens Only statement">
+      <div class="work-statement-inner">
+        <p class="work-statement-main">We make images that move between cinema, software, 3D space, and the internet.</p>
+        <p class="work-statement-lines">Some become films.<br>Some become worlds.<br>Some stay as one precise visual that changes the temperature of a project.</p>
+        <p class="work-statement-zh">意在言外</p>
+      </div>
+    </section>
+
     <section class="bento-transition" id="fields" aria-label="Fields">
       <div class="bento-logo-space bento-logo-space-top" aria-hidden="true"></div>
       <div class="bento-motion-logo" aria-hidden="true">
@@ -987,7 +1051,7 @@
 
           <article class="bento-card">
             <video class="bento-media" autoplay muted loop playsinline preload="metadata">
-              <source src="assets/frens-home.mp4" type="video/mp4">
+              <source src="assets/cover_mediaart.mp4" type="video/mp4">
             </video>
             <div class="bento-copy">
               <h2 class="bento-title">Media Art</h2>
@@ -1010,37 +1074,38 @@
     </section>
 
     <section class="section about" id="about" aria-label="About Frens Only">
-      <div>
+      <div class="about-media">
         <p class="section-label">About / <span class="zh">关于</span></p>
-        <h2 class="about-title">Images move through cinema, software, 3D space, and the internet.</h2>
+        <div class="about-video-slot" aria-hidden="true">
+          <video autoplay muted loop playsinline preload="metadata">
+            <source src="assets/frens_about.mp4" type="video/mp4">
+          </video>
+        </div>
       </div>
 
       <div class="about-right">
         <div class="about-copy">
-          <p>Frens Only is a Computational Culture Centre for synthetic media, AI cinema, and 3D visual culture. Between Taipei, Lima, Los Angeles, and online, it shapes images with atmosphere, rhythm, and presence.</p>
-          <p class="zh-copy">Frens Only 是一个计算文化中心，专注于合成媒体、AI 影像与 3D 视觉文化。在台北、利马、洛杉矶与线上空间之间，它塑造带有气氛、节奏与存在感的影像。</p>
+          <p>Frens Only is an image studio working across synthetic media, AI cinema, 3D visual culture, and internet-born aesthetics.</p>
+          <p>We create visual material for films, brands, releases, objects, online worlds, and cultural projects.</p>
         </div>
 
         <div class="principles" aria-label="Principles">
           <article class="principle">
             <h3>Creativity Over Tools <span class="zh">以意为先，技术为用</span></h3>
             <div>
-              <p>The image begins with intention: a tension, a mood, a world trying to appear.</p>
-              <p class="zh-copy">影像始于意图：一种张力、一种气氛、一个正在显现的世界。</p>
+              <p>The image begins with intention: a tension, a mood, a world on the verge of appearing.</p>
             </div>
           </article>
           <article class="principle">
-            <h3>Sharpen The Instrument <span class="zh">工欲善其事，必先利其器</span></h3>
+            <h3>Sharpen the Instrument <span class="zh">工欲善其事，必先利其器</span></h3>
             <div>
-              <p>Speed and precision matter when they create more room for visual judgment.</p>
-              <p class="zh-copy">速度与精度的意义，在于为视觉判断留下更多空间。</p>
+              <p>Speed and precision matter because they leave more room for visual judgment.</p>
             </div>
           </article>
           <article class="principle">
-            <h3>Beyond The Form <span class="zh">得意忘形</span></h3>
+            <h3>Beyond the Words <span class="zh">意在言外</span></h3>
             <div>
               <p>The final piece should feel inevitable: an image with its own weather, logic, and pulse.</p>
-              <p class="zh-copy">最终作品应像某种必然：一张拥有自身气候、逻辑与脉搏的图像。</p>
             </div>
           </article>
         </div>
@@ -1048,48 +1113,64 @@
     </section>
 
     <section class="section output" id="output" aria-label="Output">
-      <div>
+      <div class="output-head">
         <p class="section-label">Output / <span class="zh">产出</span></p>
-        <h2 class="output-title">Output</h2>
+        <p class="output-lead">Our output moves across motion, synthetic worlds, key visuals, visual systems, and digital presence.</p>
+        <p class="output-cn">我们的产出横跨动态影像、合成世界、关键视觉、视觉系统与数字呈现。</p>
       </div>
-      <div>
-        <p class="output-lead">We make images that move between cinema, software, 3D space, and the internet.</p>
-        <p class="output-cn">我们制作介于电影、软件、三维空间与互联网之间的影像。有些成为影片，有些成为世界，有些只是一张准确的图像，却能改变整个项目的气氛。</p>
-        <div class="output-grid">
-          <article class="output-item">
-            <h3>01 / Moving Image</h3>
-            <p>Short films, loops, edits, teasers, music pieces, and audiovisual fragments built with direction before technique.</p>
-          </article>
-          <article class="output-item">
-            <h3>02 / Synthetic Worlds</h3>
-            <p>Objects, environments, characters, surfaces, and atmospheres shaped through AI, 3D, CGI, and post-production.</p>
-          </article>
-          <article class="output-item">
-            <h3>03 / Visual Systems</h3>
-            <p>A coherent language of stills, motion, references, formats, and rules so a project can keep expanding without losing its center.</p>
-          </article>
-          <article class="output-item">
-            <h3>04 / Digital Presence</h3>
-            <p>Images for screens, releases, social space, performances, objects, and moments where culture is experienced online.</p>
-          </article>
-        </div>
+
+      <div class="output-grid">
+        <article class="output-item">
+          <div class="output-media">
+            <video autoplay muted loop playsinline preload="metadata">
+              <source src="Projects/cover_meta.mp4" type="video/mp4">
+            </video>
+          </div>
+          <h3>Moving Image</h3>
+          <p>Short films, loops, teasers, campaign edits, logo reveals, audiovisual fragments, and social-first motion pieces.</p>
+        </article>
+        <article class="output-item">
+          <div class="output-media">
+            <video autoplay muted loop playsinline preload="metadata">
+              <source src="assets/frens-home.mp4" type="video/mp4">
+            </video>
+          </div>
+          <h3>Synthetic Worlds</h3>
+          <p>Characters, environments, objects, machines, surfaces, atmospheres, and visual universes built through AI, 3D, CGI, and post-production.</p>
+        </article>
+        <article class="output-item">
+          <div class="output-media">
+            <video autoplay muted loop playsinline preload="metadata">
+              <source src="Projects/cover_02.mp4" type="video/mp4">
+            </video>
+          </div>
+          <h3>Key Visuals</h3>
+          <p>Hero images, campaign frames, covers, posters, launch visuals, product visuals, and art-direction pieces.</p>
+        </article>
+        <article class="output-item">
+          <div class="output-media">
+            <video autoplay muted loop playsinline preload="metadata">
+              <source src="assets/cover_mediaart.mp4" type="video/mp4">
+            </video>
+          </div>
+          <h3>Visual Systems</h3>
+          <p>Moodboards, shot language, style frames, reference systems, image rules, and continuity systems for projects that need to expand.</p>
+        </article>
+        <article class="output-item">
+          <div class="output-media">
+            <video autoplay muted loop playsinline preload="metadata">
+              <source src="Projects/cover_05.mp4" type="video/mp4">
+            </video>
+          </div>
+          <h3>Digital Presence</h3>
+          <p>Images and motion for websites, drops, exhibitions, performances, online objects, and internet-native projects.</p>
+        </article>
       </div>
     </section>
 
     <section class="section contact" id="contact" aria-label="Contact">
-      <div>
-        <p class="section-label">Contact / <span class="zh">联系</span></p>
-        <h2 class="contact-title">Frens<br>Only</h2>
-      </div>
-      <div>
-        <p class="contact-copy">For films, worlds, releases, objects, and images that need their own atmosphere.</p>
-        <p class="contact-cn">为影片、世界、发布、物件，以及需要自身气候的图像而存在。</p>
-        <div class="contact-links">
-          <a href="https://www.instagram.com/frensonly_club/" target="_blank" rel="noreferrer">Instagram</a>
-          <a href="https://frensonly.club">frensonly.club</a>
-          <a href="#home">Back to top</a>
-        </div>
-      </div>
+      <p class="section-label">Contact / <span class="zh">联系</span></p>
+      <p class="contact-dm"><a href="mailto:gm@frensonly.club">DM gm@frensonly.club</a></p>
     </section>
   </main>
 
