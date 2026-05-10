@@ -1188,6 +1188,32 @@
     window.addEventListener("scroll", updateNav, { passive: true });
     window.addEventListener("resize", updateNav);
 
+    const aboutSection = document.querySelector("#about");
+    const scrollAboutToCenter = (behavior = "smooth") => {
+      if (!aboutSection) return;
+
+      const rect = aboutSection.getBoundingClientRect();
+      const target = window.scrollY + rect.top + (rect.height / 2) - (window.innerHeight / 2);
+      window.scrollTo({
+        top: Math.max(0, target),
+        behavior,
+      });
+    };
+
+    document.querySelectorAll('a[href="#about"]').forEach((link) => {
+      link.addEventListener("click", (event) => {
+        event.preventDefault();
+        scrollAboutToCenter();
+        history.pushState(null, "", "#about");
+      });
+    });
+
+    window.addEventListener("load", () => {
+      if (window.location.hash === "#about") {
+        window.setTimeout(() => scrollAboutToCenter("auto"), 80);
+      }
+    });
+
     const bentoTransition = document.querySelector(".bento-transition");
     const bentoLogo = document.querySelector(".bento-motion-logo");
     const bentoTopSpace = document.querySelector(".bento-logo-space-top");
