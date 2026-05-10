@@ -1188,11 +1188,11 @@
     window.addEventListener("scroll", updateNav, { passive: true });
     window.addEventListener("resize", updateNav);
 
-    const aboutSection = document.querySelector("#about");
-    const scrollAboutToCenter = (behavior = "smooth") => {
-      if (!aboutSection) return;
+    const scrollSectionToCenter = (selector, behavior = "smooth") => {
+      const section = document.querySelector(selector);
+      if (!section) return;
 
-      const rect = aboutSection.getBoundingClientRect();
+      const rect = section.getBoundingClientRect();
       const target = window.scrollY + rect.top + (rect.height / 2) - (window.innerHeight / 2);
       window.scrollTo({
         top: Math.max(0, target),
@@ -1200,17 +1200,18 @@
       });
     };
 
-    document.querySelectorAll('a[href="#about"]').forEach((link) => {
+    document.querySelectorAll('a[href="#about"], a[href="#output"]').forEach((link) => {
       link.addEventListener("click", (event) => {
+        const hash = link.getAttribute("href");
         event.preventDefault();
-        scrollAboutToCenter();
-        history.pushState(null, "", "#about");
+        scrollSectionToCenter(hash);
+        history.pushState(null, "", hash);
       });
     });
 
     window.addEventListener("load", () => {
-      if (window.location.hash === "#about") {
-        window.setTimeout(() => scrollAboutToCenter("auto"), 80);
+      if (window.location.hash === "#about" || window.location.hash === "#output") {
+        window.setTimeout(() => scrollSectionToCenter(window.location.hash, "auto"), 80);
       }
     });
 
