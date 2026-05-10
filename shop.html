@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Frens de Frens / Shop</title>
+  <meta name="description" content="Frens de Frens clothing by Frens Only. First drop sold out.">
+  <meta property="og:title" content="Frens de Frens">
+  <meta property="og:description" content="Clothing objects from Frens Only. First drop sold out.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://frensonly.club/shop.html">
+  <meta property="og:image" content="assets/shop/tee_front.png">
+  <style>
+    @font-face {
+      font-family: "PP Rader";
+      src: url("assets/fonts/PPRader-Bold.woff2") format("woff2");
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: "PP Rader";
+      src: url("assets/fonts/PPRader-Medium.woff2") format("woff2");
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: "Noto Sans SC";
+      src: url("assets/fonts/NotoSansSC-VariableFont_wght.ttf") format("truetype");
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    :root {
+      color-scheme: dark;
+      --bg: #000;
+      --fg: #fff;
+      --muted: rgba(255, 255, 255, .62);
+      --soft: rgba(255, 255, 255, .08);
+      --edge: clamp(24px, 6.8vw, 150px);
+      --rader: "PP Rader", Arial, Helvetica, sans-serif;
+      --zh: "Noto Sans SC", Arial, Helvetica, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      background: var(--bg);
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: var(--rader);
+      font-weight: 500;
+      line-height: 1.25;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    .nav {
+      position: fixed;
+      top: 44px;
+      left: var(--edge);
+      right: var(--edge);
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      pointer-events: none;
+    }
+
+    .nav-links,
+    .nav-social {
+      display: flex;
+      align-items: center;
+      gap: clamp(20px, 1.8vw, 34px);
+      pointer-events: auto;
+    }
+
+    .nav a {
+      font-size: 14px;
+      line-height: 1;
+    }
+
+    .nav a:hover {
+      opacity: .62;
+    }
+
+    .ig-link,
+    .ig-link svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .shop {
+      min-height: 100vh;
+      padding: clamp(150px, 16vw, 280px) var(--edge) clamp(90px, 9vw, 170px);
+    }
+
+    .shop-hero {
+      display: grid;
+      justify-items: center;
+      gap: clamp(24px, 3vw, 46px);
+      text-align: center;
+    }
+
+    .shop-logo {
+      width: min(760px, 76vw);
+      height: auto;
+    }
+
+    .shop-copy {
+      max-width: 620px;
+      margin: 0;
+      color: var(--muted);
+      font-size: clamp(16px, 1.1vw, 22px);
+      line-height: 1.24;
+    }
+
+    .shop-copy .zh {
+      display: block;
+      margin-top: 10px;
+      font-family: var(--zh);
+      font-size: .94em;
+      line-height: 1.36;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: clamp(18px, 1.6vw, 32px);
+      margin-top: clamp(70px, 8vw, 150px);
+    }
+
+    .product {
+      min-width: 0;
+    }
+
+    .product-media {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 4 / 5.35;
+      border-radius: clamp(18px, 2vw, 40px);
+      background: #151515;
+    }
+
+    .product-media img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      max-width: none;
+      object-fit: cover;
+      transition: opacity .22s ease;
+    }
+
+    .product-media .back {
+      opacity: 0;
+    }
+
+    .product:hover .product-media .back {
+      opacity: 1;
+    }
+
+    .product:hover .product-media .front {
+      opacity: 0;
+    }
+
+    .product-info {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px 24px;
+      align-items: start;
+      padding-top: 20px;
+    }
+
+    .product h2,
+    .product p {
+      margin: 0;
+    }
+
+    .product h2 {
+      font-size: clamp(24px, 2vw, 42px);
+      font-weight: 700;
+      line-height: .92;
+    }
+
+    .price {
+      color: var(--fg);
+      font-size: clamp(18px, 1.4vw, 28px);
+      line-height: .95;
+      white-space: nowrap;
+    }
+
+    .product-note {
+      grid-column: 1 / -1;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.25;
+    }
+
+    .sold-out {
+      grid-column: 1 / -1;
+      width: 100%;
+      margin-top: 8px;
+      padding: 15px 18px 14px;
+      border: 1px solid rgba(255, 255, 255, .16);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .12);
+      color: rgba(255, 255, 255, .42);
+      font-family: var(--rader);
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1;
+      text-transform: uppercase;
+      cursor: not-allowed;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 34px var(--edge);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 980px) {
+      .products {
+        grid-template-columns: 1fr;
+      }
+
+      .product-media {
+        aspect-ratio: 4 / 4.6;
+      }
+    }
+
+    @media (max-width: 760px) {
+      :root {
+        --edge: 22px;
+      }
+
+      .nav {
+        top: 26px;
+      }
+
+      .nav-links {
+        gap: 16px;
+      }
+
+      .nav a {
+        font-size: 12px;
+      }
+
+      .shop {
+        padding-top: 124px;
+      }
+
+      .shop-logo {
+        width: min(300px, 70vw);
+      }
+
+      .product-info {
+        grid-template-columns: 1fr;
+      }
+
+      .footer {
+        display: block;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav" aria-label="Primary">
+    <div class="nav-links">
+      <a href="index.html#home">Home</a>
+      <a href="index.html#work">Work</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#output">Output</a>
+      <a href="shop.html">Shop</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+    <div class="nav-social">
+      <a class="ig-link" href="https://www.instagram.com/frensonly_club/" target="_blank" rel="noreferrer" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="4.25" y="4.25" width="15.5" height="15.5" rx="4.6" fill="none" stroke="currentColor" stroke-width="1.8"></rect>
+          <circle cx="12" cy="12" r="3.55" fill="none" stroke="currentColor" stroke-width="1.8"></circle>
+          <circle cx="16.55" cy="7.45" r="1.05" fill="currentColor"></circle>
+        </svg>
+      </a>
+    </div>
+  </nav>
+
+  <main class="shop">
+    <section class="shop-hero" aria-label="Frens de Frens">
+      <img class="shop-logo" src="assets/shop/frens_de_frens.svg" alt="Frens de Frens">
+      <p class="shop-copy">
+        Small drops from Frens Only. Objects for frens of frens.
+        <span class="zh">来自 Frens Only 的小批量物件，为朋友的朋友而生。</span>
+      </p>
+    </section>
+
+    <section class="products" aria-label="Products">
+      <article class="product">
+        <div class="product-media">
+          <img class="front" src="assets/shop/tee_front.png" alt="Frens de Frens tee front">
+          <img class="back" src="assets/shop/tee_back.png" alt="Frens de Frens tee back">
+        </div>
+        <div class="product-info">
+          <h2>Tee</h2>
+          <p class="price">$80</p>
+          <p class="product-note">Black cotton tee with front and back Frens details.</p>
+          <button class="sold-out" type="button" disabled>Buy / Sold Out</button>
+        </div>
+      </article>
+
+      <article class="product">
+        <div class="product-media">
+          <img class="front" src="assets/shop/hoodie_front.png" alt="Frens de Frens hoodie front">
+          <img class="back" src="assets/shop/hoodie_back.png" alt="Frens de Frens hoodie back">
+        </div>
+        <div class="product-info">
+          <h2>Hoodie</h2>
+          <p class="price">$150</p>
+          <p class="product-note">Black hoodie with Frens de Frens graphics.</p>
+          <button class="sold-out" type="button" disabled>Buy / Sold Out</button>
+        </div>
+      </article>
+
+      <article class="product">
+        <div class="product-media">
+          <img class="front" src="assets/shop/bomber_front.png" alt="Frens de Frens bomber front">
+          <img class="back" src="assets/shop/bomber_back.png" alt="Frens de Frens bomber back">
+        </div>
+        <div class="product-info">
+          <h2>Bomber</h2>
+          <p class="price">$320</p>
+          <p class="product-note">Black bomber jacket with embroidered Frens language.</p>
+          <button class="sold-out" type="button" disabled>Buy / Sold Out</button>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>©2026 Frens Only / Frens de Frens.</span>
+    <span>Taipei, Lima, Los Angeles, Online.</span>
+  </footer>
+</body>
+</html>
